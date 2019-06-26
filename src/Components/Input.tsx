@@ -1,4 +1,5 @@
 import React from "react";
+import { Field, FieldProps } from "formik";
 
 interface Props {
   id: string;
@@ -11,13 +12,11 @@ const Input = (props: Props) => {
   return (
     <div>
       <label htmlFor={props.id}>{props.name}</label>
-      <input
-        className="form-control"
-        type="text"
+      <Field
         name={props.name}
-        id={props.id}
-        onChange={props.changeEvent}
-        placeholder={props.placeholder}
+        render={({ field }: FieldProps) => (
+          <input {...field} type="text" id={props.id} placeholder={props.placeholder} />
+        )}
       />
     </div>
   );
