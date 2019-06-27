@@ -17,43 +17,10 @@ class Board extends Component<{}> {
     whatever: false
   };
 
-  // constructor(props: {}) {
-  //   super(props);
-
-  //   this.state = {
-  //     name: "",
-  //     surname: "",
-  //     genre: ""
-  //   };
-
-  //   const t = []; // chodzi o zasięg
-  // }
-
-  // changeName = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-  //   type k = keyof HTMLInputElement;
-  //   type t = Pick<HTMLInputElement, "accept" | "align">;
-  //   this.setState({ name: value });
-  // };
-
-  // changeSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   this.setState({ surname: e.target.value });
-  // };
-
-  setProperty = (name: string, value: string) => {
-    var obj = {};
-    obj[name] = value;
-    this.setState(obj);
+  setProperty = <State, P extends keyof State>(name: P, value: State[P]) => {
+    this.setState(prev => ({ ...prev, [name]: value }));
     console.log(this.state);
   };
-
-  setCheckbox = (name: string, checked: boolean) => {
-    var obj = {};
-    obj[name] = checked;
-    this.setState(obj);
-    console.log(this.state);
-  };
-
-  // componentDidMount() {}
 
   render() {
     return (
@@ -61,7 +28,7 @@ class Board extends Component<{}> {
         <div className="col-12 card">
           qwerty
           <div className="row m-1">
-            <B setProperty={this.setProperty} options={options} setCheckbox={this.setCheckbox} />
+            <B setProperty={this.setProperty} options={options} />
             <C
               name={this.state.name}
               surname={this.state.surname}
